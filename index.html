@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 7</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        img {
+        width: 150px;
+        height: 150px; 
+        object-fit: cover;
+        border-radius: 10px;
+        }  
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+            position: relative;
+            margin-top: 10px;
+        }
+        #panel {
+            padding: 20px;
+            background-color: lightgray;
+            display: none;
+        }
+        #gallery img {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #bigImg {
+            display: block;
+            width: 300px;
+            height: 300px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Task 1</h3>
+    <p id="idText">This text will change using ID selector.</p>
+    <p class="classText">This is a paragraph with class.</p>
+    <div>Tag selector</div>
+
+    <h3>Task 2: Visibility Methods</h3>
+    <p id="para">This paragraph can be hidden or shown.</p>
+    <button id="hideBtn">Hide</button>
+    <button id="showBtn">Show</button>
+    <button id="toggleBtn">Toggle</button>
+
+    <h3>Task 3: Fade Methods</h3>
+    <img id="fadeImg" src="https://i.pinimg.com/1200x/b9/3b/2b/b93b2b78146310057eae2dc514a2f7b3.jpg" alt="Example Image">
+    <br>
+    <button id="fadeInBtn">Fade In</button>
+    <button id="fadeOutBtn">Fade Out</button>
+    <button id="fadeToggleBtn">Fade Toggle</button>
+
+    <h3>Task 4: Slide Methods</h3>
+    <button id="slideBtn">Toggle Panel</button>
+    <div id="panel">This is a sliding panel.</div>
+
+    <h3>Task 5: Add & Remove Elements</h3>
+    <ul id="list">
+        <li>Item 1</li>
+    </ul>
+    <button id="addItem">Add Item</button>
+    <button id="removeItem">Remove Item</button>  
+
+    <h3>Task 6: Modifying Attributes</h3>
+    <img id="changeImg" src="https://i.pinimg.com/736x/3c/03/7e/3c037e2fa5e624fe9ef13b716117a3e1.jpg" alt="Small Image">
+    <br>
+    <a id="link" href="https://google.com" target="_blank">Go to Google</a>
+    <br>
+    <button id="changeSrc">Change Image</button>
+    <button id="changeHref">Change Link</button>
+    <h3>Task 7: Form Interaction</h3>
+    <form>
+        <input type="text" id="name" placeholder="Name">
+        <input type="email" id="email" placeholder="Email">
+    </form>
+    <p>Name: <span id="showName"></span></p>
+    <p>Email: <span id="showEmail"></span></p>
+    <h3>Task 8-9: Animations</h3>
+    <div class="box" id="animateBox"></div>
+    <button id="animateBtn">Basic Animate</button>
+    <button id="seqAnimateBtn">Sequential Animate</button>
+    <h3>Task 10: Combined Animation</h3>
+    <button id="comboAnimateBtn">Combined Animation</button>
+    <h3>Task 11: Mini Project - Image Gallery</h3>
+    <div id="gallery">
+        <img src="https://i.pinimg.com/736x/02/53/09/02530934ec8d1f0c4b441ac88ebd58cf.jpg" alt="1">
+        <img src="https://i.pinimg.com/736x/d3/19/dc/d319dc08d30f1c61df2639483c18a86a.jpg" alt="2">
+        <img src="https://i.pinimg.com/736x/af/85/cd/af85cd30bedffbb5779005ceef09b38c.jpg" alt="3">
+    </div>
+    <img id="bigImg" src="https://i.pinimg.com/1200x/e5/2d/1a/e52d1acc98e1cba2972f854518686bbd.jpg" alt="Large View">
+    <script>
+        $(document).ready(function(){
+        console.log("jQuery is ready!");
+        // Task 1
+        $("#idText").text("Changed by ID selector!");
+        $(".classText").html("<b>Changed by class selector!</b>");
+        $("div").css("color", "green");
+        // Task 2
+        $("#hideBtn").click(function(){ $("#para").hide(); });
+        $("#showBtn").click(function(){ $("#para").show(); });
+        $("#toggleBtn").click(function(){ $("#para").toggle(); });
+        // Task 3
+        $("#fadeInBtn").click(function(){ $("#fadeImg").fadeIn(); });
+        $("#fadeOutBtn").click(function(){ $("#fadeImg").fadeOut(); });
+        $("#fadeToggleBtn").click(function(){ $("#fadeImg").fadeToggle(); });
+        // Task 4
+        $("#slideBtn").click(function(){ $("#panel").slideToggle(); });
+        // Task 5
+        $("#addItem").click(function(){
+            $("#list").append("<li>New Item</li>");
+        });
+        $("#removeItem").click(function(){
+            $("#list li:last").remove();
+        });
+        // Task 6
+        $("#changeSrc").click(function(){
+            $("#changeImg").attr("src", "https://i.pinimg.com/736x/26/35/3d/26353d211f2383d6dd57de9eae2c4c98.jpg");
+        });
+        $("#changeHref").click(function(){
+            $("#link").attr("href", "https://w3schools.com");
+            $("#link").text("Go to W3Schools");
+        });
+        // Task 7
+        $("#name").on("keyup", function(){
+            $("#showName").text($(this).val());
+        });
+        $("#email").on("keyup", function(){
+            $("#showEmail").text($(this).val());
+        });
+        // Task 8
+        $("#animateBtn").click(function(){
+            $("#animateBox").animate({
+                width: "200px",
+                height: "200px",
+                left: "100px"
+            }, 1000);
+        });
+        // Task 9
+        $("#seqAnimateBtn").click(function(){
+            $("#animateBox")
+                .animate({ left: "200px" }, 500)
+                .animate({ top: "100px" }, 500)
+                .animate({ width: "50px", height: "50px" }, 500)
+                .animate({ left: "0px", top: "0px", width: "100px", height: "100px" }, 500);
+        });
+        // Task 10
+        $("#comboAnimateBtn").click(function(){
+            $("#animateBox").animate({
+                opacity: 0.5,
+                width: "150px",
+                height: "150px",
+                left: "150px"   
+            }, 800).animate({
+                opacity: 1,
+                left: "0px",
+                width: "100px",
+                height: "100px"
+            }, 800);
+        });
+        // Task 11 (Mini Project: Image Gallery)
+        $("#gallery img").click(function(){
+            let src = $(this).attr("src");
+            $("#bigImg").fadeOut(300, function(){
+                $("#bigImg").attr("src", src).fadeIn(300);
+            });
+        });
+    });
+    </script>
+</body>
+</html>
